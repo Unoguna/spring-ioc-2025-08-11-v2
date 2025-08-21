@@ -47,7 +47,7 @@
 public void init() {
     Reflections r = new Reflections(basePackage, Scanners.TypesAnnotated);
     for (Class<?> type : r.getTypesAnnotatedWith(Component.class)) {
-        defs.put(beanName(type), type); // "이름 → 타입" 등록
+        defs.put(lcfirst(type.getSimpleName()), type); // "이름 → 타입" 등록
     }
 }
 ```
@@ -106,17 +106,6 @@ private Object getByType(Class<?> need) {
         }
     }
     throw new NoSuchElementException("No bean of type: " + need.getName());
-}
-```
-
-### 5) `beanName(Class<?> type)` — 이름 생성 규칙
-
-```java
-private String beanName(Class<?> type) {
-    Component c = type.getAnnotation(Component.class);
-    if (c != null && !c.value().isBlank()) return c.value();
-    String s = type.getSimpleName();
-    return Character.toLowerCase(s.charAt(0)) + s.substring(1);
 }
 ```
 
