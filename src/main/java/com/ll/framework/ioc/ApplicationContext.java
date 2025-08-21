@@ -8,6 +8,8 @@ import org.reflections.scanners.Scanners;
 import java.lang.reflect.Constructor;
 import java.util.*;
 
+import static com.ll.standard.util.Ut.str.lcfirst;
+
 public class ApplicationContext {
 
     private final String basePackage;
@@ -16,14 +18,6 @@ public class ApplicationContext {
 
     public ApplicationContext(String basePackage) {
         this.basePackage = basePackage;
-    }
-
-
-    private String beanName(Class<?> type) {
-        Component c = type.getAnnotation(Component.class);
-        if (c != null && !c.value().isBlank()) return c.value();
-        String s = type.getSimpleName();
-        return Character.toLowerCase(s.charAt(0)) + s.substring(1);
     }
 
     // 스캔해서 등록만 해둔다
@@ -35,7 +29,7 @@ public class ApplicationContext {
         for (Class<?> type : r.getTypesAnnotatedWith(Component.class)) {
 
             //객체생성X, 스캔하고 타입의 이름만 등록
-            defs.put(beanName(type), type);
+            defs.put(lcfirst(type.getSimpleName()), type);
         }
     }
 
