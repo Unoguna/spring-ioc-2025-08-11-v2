@@ -1,23 +1,6 @@
 # Mini IoC Container — README
-
-이 프로젝트는 `@Component` 스캔 + **생성자 주입** + **싱글톤**만 지원하는 **초간단 IoC 컨테이너**입니다.
-아래 `ApplicationContext` 코드 기준으로 작동 방식을 설명합니다.
-
 ---
 
-## 파일 위치
-
-```
-src/main/java/com/ll/framework/ioc/ApplicationContext.java
-```
-
-사용 애노테이션:
-
-```
-com.ll.framework.ioc.annotations.Component
-```
-
----
 
 ## 무엇을 하나요?
 
@@ -33,16 +16,6 @@ com.ll.framework.ioc.annotations.Component
 
 3. **생성자 주입**
    가장 파라미터가 많은 생성자를 선택해, 각 파라미터 **타입**에 맞는 빈을 재귀적으로 주입합니다.
-
----
-
-## 의존성 (Gradle)
-
-```kotlin
-dependencies {
-    implementation("org.reflections:reflections:0.10.2")
-}
-```
 
 ---
 
